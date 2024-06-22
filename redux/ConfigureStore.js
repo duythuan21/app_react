@@ -4,7 +4,7 @@ import { createStore, combineReducers, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
 // reducers
 import { leaders } from './leaders';
-import { dishes } from './dishes';
+import { books } from'./books';
 import { comments } from './comments';
 import { promotions } from './promotions';
 import { favorites } from './favorites';
@@ -14,7 +14,7 @@ const config = { key: 'root', storage: AsyncStorage, debug: true };
 const thunk = require('redux-thunk').thunk;//since version 3.x
 export const ConfigureStore = () => {
   const store = createStore(
-    persistCombineReducers(config, { leaders, dishes, comments, promotions, favorites }),
+    persistCombineReducers(config, { leaders, books, comments, promotions, favorites }),
     applyMiddleware(thunk, logger)
   );
   const persistor = persistStore(store);

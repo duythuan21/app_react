@@ -8,34 +8,26 @@ import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = (state) => {
   return {
-    dishes: state.dishes
+    books: state.books
   }
 };
 
 class Menu extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   //selectedDish: null,
-    //   dishes: DISHES
-    // };
   }
   render() {
-    if (this.props.dishes.isLoading) {
+    if (this.props.books.isLoading) {
       return (<Loading />);
-    } else if (this.props.dishes.errMess) {
+    } else if (this.props.books.errMess) {
       return (<Text>{this.props.errMess}</Text>);
     } else {
     return (
-      // <View style={{ flex: 1 }}>
         <FlatList
-          data={this.props.dishes.dishes}
+          data={this.props.books.books}
           renderItem={({ item, index }) => this.renderMenuItem(item, index)}
           keyExtractor={(item) => item.id.toString()}
         />
-        
-      /* <Dishdetail dish={this.state.selectedDish} /> */
-      //</View>
     );
   }
 }
@@ -43,7 +35,7 @@ class Menu extends Component {
     const { navigate } = this.props.navigation;
     return (
     <Animatable.View animation='fadeInRightBig' duration={2000}>  
-      <ListItem key={index} onPress={() => navigate('Dishdetail', { dishId: item.id })}>
+      <ListItem key={index} onPress={() => navigate('Dishdetail', { bookId: item.id })}>
          <Avatar source={{uri: baseUrl + item.image}} />
         <ListItem.Content>
           <ListItem.Title>{item.name}</ListItem.Title>
@@ -53,9 +45,6 @@ class Menu extends Component {
     </Animatable.View>  
     );
   }
-  // onDishSelect(item) {
-  //   this.setState({ selectedDish: item });
-  // }
 }
 
 export default connect(mapStateToProps)(Menu);

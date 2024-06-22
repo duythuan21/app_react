@@ -10,30 +10,27 @@ import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
   return {
-    dishes: state.dishes,
+    books: state.books,
     favorites: state.favorites
   }
 };
 
 import { deleteFavorite } from '../redux/ActionCreators';
 const mapDispatchToProps = (dispatch) => ({
-  deleteFavorite: (dishId) => dispatch(deleteFavorite(dishId))
+  deleteFavorite: (bookId) => dispatch(deleteFavorite(bookId))
 });
 
 class Favorites extends Component {
   render() {
-    if (this.props.dishes.isLoading) {
+    if (this.props.books.isLoading) {
       return (<Loading />);
-    } else if (this.props.dishes.errMess) {
-      return (<Text>{this.props.dishes.errMess}</Text>);
+    } else if (this.props.books.errMess) {
+      return (<Text>{this.props.books.errMess}</Text>);
     } else {
-      const dishes = this.props.dishes.dishes.filter((dish) => this.props.favorites.some((el) => el === dish.id));
+      const books = this.props.books.books.filter((book) => this.props.favorites.some((el) => el === book.id));
       return (
-        /*<FlatList data={dishes}
-        renderItem={({ item, index }) => this.renderMenuItem(item, index)}
-        keyExtractor={(item) => item.id.toString()} />*/
       <Animatable.View animation='fadeInRightBig' duration={2000}>  
-      <SwipeListView data={dishes}
+      <SwipeListView data={books}
       renderItem={({ item, index }) => this.renderMenuItem(item, index)}
       renderHiddenItem={({ item, index }) => this.renderHiddenItem(item, index)}
       keyExtractor={(item) => item.id.toString()}
@@ -45,7 +42,7 @@ class Favorites extends Component {
   renderMenuItem(item, index) {
     const { navigate } = this.props.navigation;
     return (
-      <ListItem key={index} onPress={() => navigate('Dishdetail', { dishId: item.id })}>
+      <ListItem key={index} onPress={() => navigate('Dishdetail', { bookId: item.id })}>
         <Avatar source={{ uri: baseUrl + item.image }} />
         <ListItem.Content>
           <ListItem.Title>{item.name}</ListItem.Title>
@@ -61,7 +58,7 @@ class Favorites extends Component {
            onPress={() => {
             Alert.alert(
               'Delete Favorite?',
-              'Are you sure you wish to delete this favorite dish: ' + item.name + '?',
+              'Are you sure you wish to delete this favorite book: ' + item.name + '?',
               [
                 { text: 'Cancel', onPress: () => { /* nothing */ } },
                 { text: 'OK', onPress: () => this.props.deleteFavorite(item.id) }

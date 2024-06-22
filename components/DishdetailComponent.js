@@ -37,8 +37,7 @@ class ModalContent extends Component {
     );
   }
   handleSubmit() {
-    //alert(this.props.dishId + ':' + this.state.rating + ':' + this.state.author + ':' + this.state.comment);
-    this.props.postComment(this.props.dishId, this.state.rating, this.state.author, this.state.comment);
+    this.props.postComment(this.props.bookId, this.state.rating, this.state.author, this.state.comment);
     this.props.onPressCancel();
   }
 }
@@ -85,7 +84,7 @@ class RenderDish extends Component {
         if (recognizeDrag(gestureState) === 1) {
           Alert.alert(
             'Add Favorite',
-            'Are you sure you wish to add ' + dish.name + ' to favorite?',
+            'Are you sure you wish to add ' + book.name + ' to favorite?',
             [
               { text: 'Cancel', onPress: () => { /* nothing */ } },
               { text: 'OK', onPress: () => { this.props.favorite ? alert('Already favorite') : this.props.onPressFavorite() } },
@@ -99,11 +98,11 @@ class RenderDish extends Component {
       }
     });
     // render
-    const dish = this.props.dish;
-    if (dish != null) {
+    const book = this.props.book;
+    if (book != null) {
       return (
         <Card {...panResponder.panHandlers}>
-         <Image source={{ uri: baseUrl + dish.image }}
+         <Image source={{ uri: baseUrl + book.image }}
             style={{
               width: "100%",
               height: 100,
@@ -112,9 +111,9 @@ class RenderDish extends Component {
               justifyContent: "center",
             }}
           >
-            <Card.FeaturedTitle>{dish.name}</Card.FeaturedTitle>
+            <Card.FeaturedTitle>{book.name}</Card.FeaturedTitle>
           </Image>
-          <Text style={{ margin: 10 }}>{dish.description}</Text>
+          <Text style={{ margin: 10 }}>{book.description}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Icon raised reverse name={this.props.favorite ? 'heart' : 'heart-o'} type='font-awesome' color='#f50'
             onPress={() => this.props.favorite ? alert('Already favorite') : this.props.onPressFavorite()} />
@@ -132,15 +131,15 @@ class RenderDish extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    dishes: state.dishes,
+    books: state.books,
     comments: state.comments,
     favorites: state.favorites
   }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  postFavorite: (dishId) => dispatch(postFavorite(dishId)),
-  postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment))
+  postFavorite: (bookId) => dispatch(postFavorite(bookId)),
+  postComment: (bookId, rating, author, comment) => dispatch(postComment(bookId, rating, author, comment))
 });
 
 class Dishdetail extends Component {
@@ -151,29 +150,29 @@ class Dishdetail extends Component {
       };
     }
     render() {
-      const dishId = parseInt(this.props.route.params.dishId);
-      const dish = this.props.dishes.dishes[dishId];
-      const comments = this.props.comments.comments.filter((cmt) => cmt.dishId === dishId);
-      const favorite = this.props.favorites.some((el) => el === dishId);
+      const bookId = parseInt(this.props.route.params.bookId);
+      const book = this.props.books.books[bookId];
+      const comments = this.props.comments.comments.filter((cmt) => cmt.bookId === bookId);
+      const favorite = this.props.favorites.some((el) => el === bookId);
       return (
         <ScrollView>
           <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
-          <RenderDish dish={dish} favorite={favorite} onPressFavorite={() => this.markFavorite(dishId)} onPressComment={() => this.setState({ showModal: true })}  />
+          <RenderDish book={book} favorite={favorite} onPressFavorite={() => this.markFavorite(bookId)} onPressComment={() => this.setState({ showModal: true })}  />
           </Animatable.View>
           <Animatable.View animation='fadeInUp' duration={2000} delay={1000}>
           <RenderComments comments={comments} />
           </Animatable.View>
           <Modal animationType={'slide'} visible={this.state.showModal}
           onRequestClose={() => this.setState({ showModal: false })}>
-          <ModalContent dishId={dishId}
+          <ModalContent bookId={bookId}
             onPressCancel={() => this.setState({ showModal: false })} 
             postComment={this.props.postComment}/>
         </Modal>
         </ScrollView>
       );
     }
-    markFavorite(dishId) {
-      this.props.postFavorite(dishId);
+    markFavorite(bookId) {
+      this.props.postFavorite(bookId);
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Dishdetail);

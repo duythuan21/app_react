@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ThuanPND",
-    "slug": "ThuanPND",
+    "name": "Library",
+    "slug": "Library",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

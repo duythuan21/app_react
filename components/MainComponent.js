@@ -5,7 +5,7 @@ import { View, Text, Linking } from 'react-native';
 import { Icon, Image } from 'react-native-elements';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { connect } from 'react-redux';
-import { fetchLeaders, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
+import { fetchLeaders, fetchBooks, fetchComments, fetchPromos } from '../redux/ActionCreators';
 import { baseUrl } from '../shared/baseUrl';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
@@ -94,7 +94,7 @@ function ReservationNavigatorScreen() {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchLeaders: () => dispatch(fetchLeaders()),
-  fetchDishes: () => dispatch(fetchDishes()),
+  fetchBooks: () => dispatch(fetchBooks()),
   fetchComments: () => dispatch(fetchComments()),
   fetchPromos: () => dispatch(fetchPromos())
 });
@@ -188,7 +188,7 @@ function CustomDrawerContent(props) {
           <Image source={{ uri: baseUrl + 'images/logo.png' }} style={{ margin: 10, width: 80, height: 60 }} />
         </View>
         <View style={{ flex: 2 }}>
-          <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>ThuanPND</Text>
+          <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>Library</Text>
         </View>
       </View>
       <DrawerItemList {...props} />
@@ -252,7 +252,7 @@ return (
   componentDidMount() {
     // redux
     this.props.fetchLeaders();
-    this.props.fetchDishes();
+    this.props.fetchBooks();
     this.props.fetchComments();
     this.props.fetchPromos();
   }

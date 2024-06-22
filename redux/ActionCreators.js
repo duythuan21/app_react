@@ -24,14 +24,14 @@ const addLeaders = (leaders) => ({
   payload: leaders
 });
 // dishes
-export const fetchDishes = () => (dispatch) => {
+export const fetchBooks = () => (dispatch) => {
   dispatch(dishesLoading());
-  return fetch(baseUrl + 'dishes')
+  return fetch(baseUrl + 'books')
     .then((response) => {
       if (!response.ok) throw Error('Error ' + response.status + ': ' + response.statusText);
       else return response.json();
     })
-    .then((dishes) => dispatch(addDishes(dishes)))
+    .then((books) => dispatch(addDishes(books)))
     .catch((error) => dispatch(dishesFailed(error.message)));
 };
 const dishesLoading = () => ({
@@ -41,9 +41,9 @@ const dishesFailed = (errmess) => ({
   type: ActionTypes.DISHES_FAILED,
   payload: errmess
 });
-const addDishes = (dishes) => ({
+const addDishes = (books) => ({
   type: ActionTypes.ADD_DISHES,
-  payload: dishes
+  payload: books
 });
 
 // comments
@@ -87,16 +87,16 @@ const addPromos = (promos) => ({
   payload: promos
 });
 // favorites
-export const postFavorite = (dishId) => (dispatch) => {
-  dispatch(addFavorite(dishId));
+export const postFavorite = (bookId) => (dispatch) => {
+  dispatch(addFavorite(bookId));
 };
-const addFavorite = (dishId) => ({
+const addFavorite = (bookId) => ({
   type: ActionTypes.ADD_FAVORITE,
-  payload: dishId
+  payload: bookId
 });
 
-export const postComment = (dishId, rating, author, comment) => (dispatch) => {
-  var newcmt = { dishId: dishId, rating: rating, author: author, comment: comment, date: new Date().toISOString() };
+export const postComment = (bookId, rating, author, comment) => (dispatch) => {
+  var newcmt = { bookId: bookId, rating: rating, author: author, comment: comment, date: new Date().toISOString() };
   //dispatch(addComment(newcmt));
   fetch(baseUrl + 'comments', {
     method: 'POST',
@@ -114,7 +114,7 @@ const addComment = (newcmt) => ({
   payload: newcmt
 });
 // favorites
-export const deleteFavorite = (dishId) => ({
+export const deleteFavorite = (bookId) => ({
   type: ActionTypes.DELETE_FAVORITE,
-  payload: dishId
+  payload: bookId
 });

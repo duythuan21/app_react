@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import { Card, Image } from 'react-native-elements';
-
-//import { DISHES } from '../shared/dishes';
-//import { PROMOTIONS } from '../shared/promotions';
-//import { LEADERS } from '../shared/leaders';
 import { baseUrl } from '../shared/baseUrl';
 import { connect } from 'react-redux';
 import Loading from './LoadingComponent';
@@ -36,7 +32,7 @@ class RenderItem extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    dishes: state.dishes,
+    books: state.books,
     promotions: state.promotions,
     leaders: state.leaders
   }
@@ -45,22 +41,17 @@ const mapStateToProps = (state) => {
 class Home extends Component {
   constructor(props) {
     super(props);
-    /*this.state = {
-      dishes: DISHES,
-      promotions: PROMOTIONS,
-      leaders: LEADERS
-    };*/
   }
   render() {
-    const dish = this.props.dishes.dishes.filter((dish) => dish.featured === true)[0];
+    const book = this.props.books.books.filter((book) => book.featured === true)[0];
     const promo = this.props.promotions.promotions.filter((promo) => promo.featured === true)[0];
     const leader = this.props.leaders.leaders.filter((leader) => leader.featured === true)[0];
     return (
       <ScrollView>
       <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
-        <RenderItem item={dish}
-      isLoading={this.props.dishes.isLoading}
-      errMess={this.props.dishes.errMess} />
+        <RenderItem item={book}
+      isLoading={this.props.books.isLoading}
+      errMess={this.props.books.errMess} />
      </Animatable.View>
      <Animatable.View animation='fadeInRight' duration={2000} delay={1000}>  
     <RenderItem item={promo}
