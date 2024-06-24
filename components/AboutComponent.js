@@ -11,10 +11,10 @@ class RenderHistory extends Component {
   render() {
     return (
       <Card>
-        <Card.Title>Our History</Card.Title>
+        <Card.Title>Lịch sử sử thư viện chúng tôi</Card.Title>
         <Card.Divider />
-        <Text style={{ margin: 10 }}>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</Text>
-        <Text style={{ margin: 10 }}>The restaurant traces its humble beginnings to The Frying Pan, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the worlds best cuisines in a pan.</Text>
+        <Text style={{ margin: 10 }}>Thư viện của chúng tôi là một kho tàng tri thức phong phú, nơi cung cấp một môi trường học tập và nghiên cứu tối ưu cho cộng đồng. Với hơn 50.000 đầu sách thuộc nhiều lĩnh vực khác nhau, từ khoa học, công nghệ đến văn học và nghệ thuật, thư viện mang đến nguồn tài nguyên vô tận cho người đọc. Đặc biệt, thư viện còn sở hữu một bộ sưu tập tài liệu số hóa, cho phép truy cập từ xa, giúp việc học tập trở nên thuận tiện và hiệu quả hơn bao giờ hết.</Text>
+        <Text style={{ margin: 10 }}>Không chỉ là nơi lưu giữ và cung cấp tài liệu, thư viện của chúng tôi còn là một không gian giao lưu văn hóa và tri thức. Các hoạt động như hội thảo, tọa đàm, và các câu lạc bộ đọc sách thường xuyên được tổ chức, tạo điều kiện cho cộng đồng trao đổi, học hỏi và phát triển. Với đội ngũ nhân viên nhiệt tình, chuyên nghiệp, thư viện luôn sẵn sàng hỗ trợ và đáp ứng mọi nhu cầu của người sử dụng, từ việc tìm kiếm tài liệu đến tư vấn nghiên cứu.</Text>
       </Card>
     );
   }
