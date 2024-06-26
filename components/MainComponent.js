@@ -69,7 +69,7 @@ function FavoritesNavigatorScreen() {
           headerLeft: () => (<Icon name='menu' size={36} color='#fff' onPress={() => navigation.toggleDrawer()} />)
         })} />
       <FavoritesNavigator.Screen name='Dishdetail' component={Dishdetail}
-        options={{ headerTitle: 'Dish Detail' }} />
+        options={{ headerTitle: 'Book Details' }} />
     </FavoritesNavigator.Navigator>
   );
 }
@@ -117,7 +117,7 @@ function MenuNavigatorScreen() {
         })} />
       <MenuNavigator.Screen name='Dishdetail' component={Dishdetail}
         options={{
-          headerTitle: 'Dish Detail'
+          headerTitle: 'Book Details'
         }} />
     </MenuNavigator.Navigator>
   );
